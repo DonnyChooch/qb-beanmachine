@@ -257,6 +257,8 @@ end)
 
 ## And finally add this into qb-bossmenu config.lua
 
-['bean'] = vector3(-631.411, 223.711, 81.888)```
+```
+['bean'] = vector3(-631.411, 223.711, 81.888)
+```
 
 After you do this everything should be good to go! I have also added images for the items in the images folder, just drop those into your inventory images folder and those will be good to go!
