@@ -5,7 +5,9 @@ This is a Bean Machine job script for QBCore that uses qb-target and nh-context,
 -- REQUIREMENTS --
 
 PolyZone https://github.com/mkafrin/PolyZone
+
 qb-target https://github.com/BerkieBb/qb-target
+
 nh-context https://github.com/nerohiro/nh-context
 
 Add this to the shared.lua in qb-core
