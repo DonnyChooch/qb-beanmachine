@@ -254,4 +254,4 @@ end)
 -------------------------------------------------------------------------------------------------------------
 
 
-After you do this everything should be good to go!
+After you do this everything should be good to go! I have also added images for the items in the images folder, just drop those into your inventory images folder and those will be good to go!
