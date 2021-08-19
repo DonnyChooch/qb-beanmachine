@@ -244,7 +244,6 @@ end)
 
 ## Add this into qb-smallresources config.lua under Consumables
 
-    ```
     ["muffin"] = math.random(15, 35),
     ["cookie"] = math.random(15, 35),
     ["eggsbacon"] = math.random(35, 54),
@@ -258,7 +257,6 @@ end)
 
 ## And finally add this into qb-bossmenu config.lua
 
-```
 ['bean'] = vector3(-631.411, 223.711, 81.888)```
 
 After you do this everything should be good to go! I have also added images for the items in the images folder, just drop those into your inventory images folder and those will be good to go!
