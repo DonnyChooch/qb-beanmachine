@@ -2,7 +2,7 @@
 This is a Bean Machine job script for QBCore that uses qb-target and nh-context, this was forked from https://github.com/DrBlackBeard095/Qb-Burgershot all credit goes to him all I did was make it a Bean Machine Job!
 
 
--- REQUIREMENTS --
+## REQUIREMENTS
 
 PolyZone https://github.com/mkafrin/PolyZone
 
@@ -10,10 +10,11 @@ qb-target https://github.com/BerkieBb/qb-target
 
 nh-context https://github.com/nerohiro/nh-context
 
-Add this to the shared.lua in qb-core
+## Add this to the shared.lua in qb-core
 
--- Job -- 
+### Job
 
+```
 ["bean"] = {
 		label = "Bean Machine",
 		defaultDuty = true,
@@ -33,11 +34,13 @@ Add this to the shared.lua in qb-core
             },
         },
 	},
+```
 
--------------------------------------------------------------------------------------------------------------
 
--- Items -- 
+### Items 
 
+
+```
 -- BEAN MACHINE
 	["banana"]		 	         	 = {["name"] = "banana", 			  	  	    ["label"] = "Banana",    	            ["weight"] = 200, 		["type"] = "item", 	    ["image"] = "banana.png", 				["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,	   ["combinable"] = nil,   ["description"] = "Banana."},
 	["donut"]		 	         	 = {["name"] = "donut", 			  	  	    ["label"] = "Donut",    	            ["weight"] = 400, 		["type"] = "item", 	    ["image"] = "donut.png", 				["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,	   ["combinable"] = nil,   ["description"] = "Donut."},
@@ -49,12 +52,12 @@ Add this to the shared.lua in qb-core
 	["muffin"]		 	             = {["name"] = "muffin", 			  	  	    ["label"] = "Muffin", 		            ["weight"] = 600, 		["type"] = "item", 	    ["image"] = "muffin.png", 			    ["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,	   ["combinable"] = nil,   ["description"] = "Tasty Muffin."},
 	["cookie"]		 	             = {["name"] = "cookie", 			  	  	    ["label"] = "Chocolate Chip Cookie",    ["weight"] = 600, 		["type"] = "item", 	    ["image"] = "cookie.png", 			    ["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,	   ["combinable"] = nil,   ["description"] = "Tasty Cookie."},
 	["beans"]		 	             = {["name"] = "beans", 			  	  	    ["label"] = "Coffee Beans", 		    ["weight"] = 500, 		["type"] = "item", 	    ["image"] = "beans.png", 			    ["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,	   ["combinable"] = nil,   ["description"] = "Coffee Beans."},
+```
 
---------------------------------------------------------------------------------------------------------
 
+## Now add this to qb-smallresources server/consumables.lua
 
--- Now add this to qb-smallresources server/consumables.lua --
-
+```
 -- BEAN MACHINE
 
 QBCore.Functions.CreateUseableItem("muffin", function(source, item)
@@ -119,11 +122,12 @@ QBCore.Functions.CreateUseableItem("pancakes", function(source, item)
         TriggerClientEvent("consumables:client:EatPancakes", source, item.name) 
     end
 end)
+```
 
----------------------------------------------------------------------------------------------------------------------
 
--- Then add this into qb-smallresources client/consumables.lua --
+## Then add this into qb-smallresources client/consumables.lua
 
+```
 -- BEAN MACHINE
 
 RegisterNetEvent("consumables:client:EatMuffin")
@@ -236,11 +240,11 @@ AddEventHandler("consumables:client:EatPancakes", function(itemName)
 end)
 
 -- END OF BEAN MACHINE
+```
 
------------------------------------------------------------------------------------------------------------
+## And finally add this into qb-smallresources config.lua under Consumables
 
--- And finally add this into qb-smallresources config.lua under Consumables
-
+    ```
     ["muffin"] = math.random(15, 35),
     ["cookie"] = math.random(15, 35),
     ["eggsbacon"] = math.random(35, 54),
@@ -250,8 +254,7 @@ end)
     ["pancakes"] = math.random(25, 34),
     ["frenchtoast"] = math.random(25, 34),
     ["banana"] = math.random(25, 34),
-
--------------------------------------------------------------------------------------------------------------
+```
 
 
 After you do this everything should be good to go! I have also added images for the items in the images folder, just drop those into your inventory images folder and those will be good to go!
