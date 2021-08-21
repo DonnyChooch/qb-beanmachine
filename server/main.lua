@@ -3,15 +3,16 @@ AddEventHandler("qb-beanmachine:bill:player", function(playerId, amount)
         local biller = QBCore.Functions.GetPlayer(source)
         local billed = QBCore.Functions.GetPlayer(tonumber(playerId))
         local amount = tonumber(amount)
-        if biller.PlayerData.job.name == 'burgershot' then
+        if biller.PlayerData.job.name == 'bean' then
             if billed ~= nil then
                 if biller.PlayerData.citizenid ~= billed.PlayerData.citizenid then
                     if amount and amount > 0 then
-                        exports.ghmattimysql:execute('INSERT INTO phone_invoices (citizenid, amount, society, sender) VALUES (@citizenid, @amount, @society, @sender)', {
+                        exports.ghmattimysql:execute('INSERT INTO phone_invoices (citizenid, amount, society, sender, sendercitizenid) VALUES (@citizenid, @amount, @society, @sender, @sendercitizenid)', {
                             ['@citizenid'] = billed.PlayerData.citizenid,
                             ['@amount'] = amount,
                             ['@society'] = biller.PlayerData.job.name,
-                            ['@sender'] = biller.PlayerData.charinfo.firstname
+                            ['@sender'] = biller.PlayerData.charinfo.firstname,
+                            ['@sendercitizenid'] = biller.PlayerData.citizenid
                         })
                         TriggerClientEvent('qb-phone:RefreshPhone', billed.PlayerData.source)
                         TriggerClientEvent('QBCore:Notify', source, 'Invoice Successfully Sent', 'success')
