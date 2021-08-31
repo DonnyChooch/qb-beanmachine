@@ -38,8 +38,15 @@ QBCore.Functions.CreateCallback('qb-beanmachine:server:get:ingredientCoffee', fu
     local water = Ply.Functions.GetItemByName("water_bottle")
     local beans = Ply.Functions.GetItemByName("beans")
     if water ~= nil and beans ~= nil then
-        cb(true)
+        if water.amount >= 2 and beans.amount >= 5 then 
+            cb(true)
+            TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['water_bottle'], "remove")
+            TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['beans'], "remove")
+        else
+            cb(false)
+            TriggerClientEvent('QBCore:Notify', source, "You don't have the right ingredients to make coffee", 'error')   
+        end
     else
-        cb(false)
+        TriggerClientEvent('QBCore:Notify', source, "You don't have the right ingredients to make coffee", 'error')   
     end
 end)
