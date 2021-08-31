@@ -137,7 +137,7 @@ AddEventHandler("qb-beanmachine:MakeCoffee", function()
     		if HasItems then
 				Working = true
 				TriggerEvent('inventory:client:busy:status', true)
-				QBCore.Functions.Progressbar("pickup_sla", "Making Coffee..", 4000, false, true, {
+				QBCore.Functions.Progressbar("pickup_sla", "Making Some Coffee..", 4000, false, true, {
 					disableMovement = true,
 					disableCarMovement = false,
 					disableMouse = false,
@@ -149,9 +149,10 @@ AddEventHandler("qb-beanmachine:MakeCoffee", function()
 				}, {}, {}, function() -- Done
 					Working = false
 					TriggerEvent('inventory:client:busy:status', false)
-					TriggerServerEvent('QBCore:Server:RemoveItem', "water_bottle", 1)
-                    TriggerServerEvent('QBCore:Server:RemoveItem', "beans", 1)
+					TriggerServerEvent('QBCore:Server:RemoveItem', "water_bottle", 2)
+                    TriggerServerEvent('QBCore:Server:RemoveItem', "beans", 5)
 					TriggerServerEvent('QBCore:Server:AddItem', "coffee", 5)
+                    TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["coffee"], "add")
                     QBCore.Functions.Notify("You made a few Cups Of Coffee", "success")
 				end, function()
 					TriggerEvent('inventory:client:busy:status', false)
@@ -159,16 +160,16 @@ AddEventHandler("qb-beanmachine:MakeCoffee", function()
 					Working = false
 				end)
 			else
-   				QBCore.Functions.Notify("You don't have the ingredients to make this", "error")
+   				--QBCore.Functions.Notify("You don't have the ingredients to make this", "error")
 			end
 		end)
 	else 
-		QBCore.Functions.Notify("You must be clocked into work", "error")
+		QBCore.Functions.Notify("You must be clocked in to work", "error")
 	end
 end)
 
-RegisterNetEvent("qb-beanmachine:DutyB")
-AddEventHandler("qb-beanmachine:DutyB", function()
+RegisterNetEvent("qb-beanmachine:Duty")
+AddEventHandler("qb-beanmachine:Duty", function()
     TriggerServerEvent("QBCore:ToggleDuty")
 end)
 
@@ -204,8 +205,8 @@ end)
 Citizen.CreateThread(function()
     
 
-    exports['qb-target']:AddBoxZone("Duty", vector3(-635.58, 227.17, 82.35), 1, 1.2, {
-        name = "Duty",
+    exports['qb-target']:AddBoxZone("BeanDuty", vector3(-635.58, 227.17, 82.35), 1, 1.2, {
+        name = "BeanDuty",
         heading = 32,
         debugPoly = false,
         minZ=82.0,
@@ -213,7 +214,7 @@ Citizen.CreateThread(function()
     }, {
         options = {
             {  
-                event = "qb-beanmachine:DutyB",
+                event = "qb-beanmachine:Duty",
                 icon = "far fa-clipboard",
                 label = "Clock On/Off",
                 job = "bean",
@@ -249,9 +250,9 @@ Citizen.CreateThread(function()
     }, {
         options = {
             {
-                event = "qb-beanmachine:MakeCoffee",
+                event = "nh-context:MakeCoffeeMenu",
                 icon = "fas fa-coffee",
-                label = "Make Coffee",
+                label = "Use Coffee Machine",
                 job = "bean",
             },
         },
@@ -270,7 +271,7 @@ Citizen.CreateThread(function()
                     {
                         event = "nh-context:BeanMenu",
                         icon = "fas fa-laptop",
-                        label = "Use Shop!",
+                        label = "Buy Items Or Check Storage!",
                         job = "bean",
                     },
                 },
@@ -323,13 +324,13 @@ RegisterNetEvent('nh-context:BeanMenu', function(data)
     TriggerEvent('nh-context:sendMenu', {
         {
             id = 0,
-            header = "| Fridge |",
+            header = " 🧊 Fridge 🧊 ",
             txt = "",
         },
         {
             id = 1,
             header = "• Order Items",
-            txt = "Use Shop!",
+            txt = "Buy items from the shop!",
             params = {
                 event = "qb-beanmachine:shop"
             }
@@ -346,6 +347,24 @@ RegisterNetEvent('nh-context:BeanMenu', function(data)
             id = 3,
             header = "Close (ESC)",
             txt = "",
+        },
+    })
+end)
+
+RegisterNetEvent('nh-context:MakeCoffeeMenu', function(data)
+    TriggerEvent('nh-context:sendMenu', {
+        {
+            id = 0,
+            header = " ☕ Bean Machine Coffee ☕ ",
+            txt = "",
+        },
+        {
+            id = 1,
+            header = "• Make Some Coffee",
+            txt = "2 Bottles Of Water, 5 Bags Of Coffee Beans",
+            params = {
+                event = "qb-beanmachine:MakeCoffee"
+            }
         },
     })
 end)
