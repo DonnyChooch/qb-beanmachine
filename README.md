@@ -10,6 +10,9 @@ qb-target https://github.com/BerkieBb/qb-target
 
 nh-context https://github.com/nerohiro/nh-context
 
+The MLO this is set up for is the one by Uncle Just which is paid so I will not be sharing it here. You could substitute for this free one on GTA 5 Mods and change the locations
+https://www.gta5-mods.com/maps/mlo-bean-machine-fivem-sp
+
 ## Add this to the shared.lua in qb-core
 
 ### Job
